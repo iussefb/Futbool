@@ -1,0 +1,12 @@
+
+package Futbool;
+
+
+public class Plantilla extends Persona{
+   
+    
+    private int num;
+    private String seguro;
+    private int sou;
+    
+}

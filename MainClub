@@ -1,0 +1,15 @@
+package Futbool;
+
+import java.io.IOException;
+
+public class MainClub {
+    
+    public static void main(String[] args) throws IOException, IOException {
+        
+        Club p = new Club();
+        p.GestioClub();
+        
+        
+    }
+    
+}

@@ -1,0 +1,66 @@
+package Futbool;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Club {
+    
+    private String nom;
+    private String CIF;
+    private String adreça;
+    private String movil;
+    private String email;
+    private String www;
+    
+    
+    Scanner teclat = new Scanner (System.in);
+    static boolean sortir= false;
+    static int optio;
+    public void GestioClub() throws IOException{
+        System.out.println("-----------------------------------------------");
+        System.out.println("                 Gestio club                   ");
+        System.out.println("_______________________________________________");
+        
+        do{
+            System.out.println(" 1- Visualitzar los datos del club");
+            System.out.println(" 2- Gistio los socis");
+            System.out.println(" 3- Gistio los plantillas");
+            System.out.println(" 4- Visualitzar les datos economeque del club ");
+            System.out.println(" 5- Sortir");
+            System.out.println("\t\nTRIA UNA OPCIO:");
+            
+            while(!teclat.hasNextInt()){
+                System.out.println("valor no valid");
+                teclat.next();
+                System.out.println("entre un numero: ");
+            }
+            
+            switch(optio= teclat.nextInt()){
+                case 1: VisualitzarDatosClub();
+                    break;
+                case 2:
+                    Persona p = new Persona();
+                    p.GestioSoci();
+                    break;
+                case 3: //GistioPlantilla();
+                    break;
+                case 4://VisualitzarEconomeque();
+                    break;
+                case 5:
+                    sortir = true;
+                    break;
+                default:
+                    System.out.println("error");
+            
+            
+            
+            }
+        }while(!sortir);
+    }
+    
+    
+    private void VisualitzarDatosClub(){}
+    
+    
+    
+}

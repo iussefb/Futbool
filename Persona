@@ -1,0 +1,290 @@
+
+package Futbool;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public  class Persona {
+     //DNI, nom, cognoms, data de naixement, telèfon i email.
+    private DNI Dni;
+    private String nom;
+    private String cognom;
+    private LocalDate naix;
+    private Movil telefon;
+    private Email email;
+    
+    static Scanner teclat = new Scanner (System.in);
+    static boolean sortir = false;
+    
+    ArrayList <Soci> soci;
+    
+    
+    DNI d= new DNI();
+    Email e = new Email();
+    Movil m = new Movil();
+
+    /*public Persona(DNI Dni, String nom, String cognom, LocalDate naix, String telefon, Email email) {
+        this.Dni = Dni;
+        this.nom = nom;
+        this.cognom = cognom;
+        this.naix = naix;
+        this.telefon = telefon;
+        this.email = email;
+        
+    }*/
+
+    public Persona() {
+    }
+    
+    
+    
+    public void GestioSoci() throws IOException{
+        do{
+                 System.out.println("\n");
+            System.out.println("   ªªª   Menu Soci   ªªª ");
+            System.out.println(" 1- Alta Soci");
+            System.out.println(" 2- Modificar Dades de Soci");
+            System.out.println(" 3- Baixa un Soci ");
+            System.out.println(" 4- Visualitzar els Soci Ordenat  ");
+            System.out.println(" 5- Tornar Menu Club ");
+            System.out.println(" 6- Sortir ");
+            System.out.println("\t\nTRIA UNA OPCIO:");
+            Soci s =new Soci();
+            int opcio;
+            switch(opcio= teclat.nextInt() ){
+                
+                case 1 : 
+                    
+                    s.Alta();
+                    break;
+                case 2 :
+                    
+                    s.ModificarSoci();
+                    break;
+                case 3 :
+                    this.soci = s.BaixaSoci();
+                    break;
+                case 4 :VisualitzarSoci();
+                    break;
+                case 5 :
+                    Club c = new Club();
+                    c.GestioClub();
+                case 6:
+                    sortir=true;
+                    break;    
+                default:
+                    System.out.println("");
+            }
+        }while(!sortir);
+        
+    }
+    
+    private void VisualitzarSoci() throws IOException{
+        
+        
+        do{
+                 System.out.println("\n");
+            System.out.println("   ªªª   Menu Soci   ªªª ");
+            System.out.println(" 1- Visualitzar Soci ordenat per nomi cognom");
+            System.out.println(" 2- Visualitzar Soci ordenat per localitat ");
+            System.out.println(" 3- Visualitzar Soci ordenat per quota");
+            System.out.println(" 4- Tornar Menu Soci ");
+            System.out.println(" 5- Sortir ");
+            System.out.println("\t\nTRIA UNA OPCIO:");
+            Soci s =new Soci();
+            int opcio;
+            switch(opcio= teclat.nextInt() ){
+                case 1 :
+                    this.soci = s.VisualitzarSociordenatnom();
+                    break;
+                case 2 :
+                    this.soci = s.VisualitzarSociOrdenatLocalitat();
+                    break;
+                case 3 :
+                    this.soci = s.VisualitzarSociOrdenatQuota();
+                    break;
+                case 4 : GestioSoci();
+                    break;
+                case 5:
+                    sortir=true;
+                    break;    
+                default:
+                    System.out.println("");
+            }
+        }while(!sortir);}
+    
+    public void GestoiPlantilla(){
+    
+    }
+    
+    public void Alta() throws IOException{
+    
+            System.out.println("Enter el nom");
+        this.nom = teclat.next();
+            System.out.println("Enter el cognom"); 
+        this.cognom = teclat.next();
+
+        String dni ;
+            do{
+               System.out.println("enter dni");
+               dni = teclat.next();
+            }while(!d.ValidarDni(dni));
+        d.setDni(dni);
+        setDni(d);
+
+
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            boolean dataCorrecte;
+            do{
+                try{
+                    dataCorrecte=true;
+                    System.out.println("Enter el data de naixament(yyyy-MM-dd):");
+                    this.naix = LocalDate.parse(teclat.next(), f);
+                }catch(Exception e){
+                    dataCorrecte=false;
+                }
+            }while(!dataCorrecte);
+
+        String email;
+            do{
+                System.out.println("Enter el email:");
+                email = teclat.next();
+            }while(!e.ValidarEmail(email));
+
+        e.setEmail(email);
+        setEmail(e);
+
+        String movil ;
+            do{
+               System.out.println("Enter el movil:");
+               movil = teclat.next();
+            }while(!m.validarMovil(movil));
+        m.setNumero(movil);
+        setTelefon(m);
+    }
+    
+
+    public void Midificar(String Dni, String nom, String cognom, String naix, String Movil, String Email) throws IOException{
+        
+        d.setDni(Dni);
+        setDni(d);
+        this.nom = nom;
+        this.cognom = cognom;
+        this.naix = LocalDate.parse(naix);
+        m.setNumero(Movil);
+        setTelefon(m);
+        e.setEmail(Email);
+        setEmail(e);
+        
+        do{
+            
+            int opcio;
+            switch(opcio= teclat.nextInt() ){
+                
+                case 1 : 
+                    
+                    String dni ;
+                    do{
+                       System.out.println("enter dni");
+                       dni = teclat.next();
+                    }while(!d.ValidarDni(dni));
+                        d.setDni(dni);
+                        setDni(d);
+                    break;
+                    
+                case 2 :
+                    System.out.println("Enter el nom");
+                    this.nom = teclat.next();
+                    
+                    break;
+                case 3 :
+                    System.out.println("Enter el cognom");
+                    this.cognom = teclat.next();
+                    
+                    break;
+                case 4 :
+                    System.out.println("Enter el data de naixamet");
+                     DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    boolean dataCorrecte;
+                    do{
+                        try{
+                            dataCorrecte=true;
+                            System.out.println("Enter el data de naixament(yyyy-MM-dd):");
+                            this.naix = LocalDate.parse(teclat.next(), f);
+                        }catch(Exception e){
+                            dataCorrecte=false;
+                        }
+                    }while(!dataCorrecte);
+                    
+                    break;
+                case 5 :
+                    System.out.println("Enter el telefon");
+                    String movil ;
+                    do{
+                       System.out.println("Enter el movil:");
+                       movil = teclat.next();
+                    }while(!m.validarMovil(movil));
+                    m.setNumero(movil);
+                    setTelefon(m);
+                    break;
+                case 6:
+                    
+                    String email;
+                    do{
+                        System.out.println("Enter el email:");
+                        email = teclat.next();
+                    }while(!e.ValidarEmail(email));
+
+                    e.setEmail(email);
+                    setEmail(e);
+                    break; 
+                
+                case 10:
+                    
+                    sortir=true;
+                    break;
+                default:
+                    System.out.println("");
+            }
+        }while(!sortir);
+        
+    }
+    
+    @Override
+    public String toString() {
+        return   Dni.getDni() + ":" + nom + ":" + cognom + ":" + naix + ":" + telefon.getNumero() + ":" + email.getEmail();
+    }
+    
+    
+
+    public void setDni(DNI Dni) {
+        this.Dni = Dni;
+    }
+
+    public void setTelefon(Movil telefon) {
+        this.telefon = telefon;
+    }
+
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setCognom(String cognom) {
+        this.cognom = cognom;
+    }
+
+    public void setNaix(LocalDate naix) {
+        this.naix = naix;
+    }
+    
+    
+    
+}

@@ -1,0 +1,33 @@
+
+package Futbool;
+
+ public class Movil {
+    
+        private String numero;
+
+        public Movil(String numero) {
+            this.numero = numero;
+        }
+        public Movil() {
+        }
+        public String getNumero() {
+            return numero;
+        }
+        public void setNumero(String numero) {
+            this.numero = numero;
+        }
+        public boolean validarMovil(String numero) {
+
+            if(numero.length() != 9)return false;
+            if(soloNumeros(numero) !=true) return false;
+            return true;
+        }
+        private boolean soloNumeros(String numero){
+            try{
+                    Integer.parseInt(numero);
+                    return true;
+            }catch(Exception e){
+                    return false;
+            }
+        }
+}

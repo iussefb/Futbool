@@ -1,0 +1,11 @@
+
+package Futbool;
+
+import java.time.LocalDate;
+
+
+public class Ticnics extends Plantilla{
+    
+    private LocalDate expriencia;
+    
+}

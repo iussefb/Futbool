@@ -1,0 +1,34 @@
+
+package Futbool;
+
+public class Email {
+    
+    private String email;
+    
+    public Email(String email) {
+        this.email = email;
+    }
+    public Email() {
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+        public boolean ValidarEmail(String email){
+        int arroba = email.indexOf("@");
+        int punto = email.indexOf(".");
+        
+        if(email.startsWith("@") || email.startsWith(".") || email.startsWith("/") || email.startsWith("#") || email.startsWith("+"))return false;
+        if(email.endsWith("@") || email.endsWith(".")|| email.endsWith("/") || email.endsWith("#") || email.endsWith("+"))return false;
+        if(arroba == -1 || punto== -1)   return false;
+        if(email.contains("'") || email.contains("/") || email.contains(" ")|| email.contains("+"))   return false;
+        
+        arroba +=1;
+        int secundArroba = email.indexOf("@", arroba);
+        if(secundArroba>0)return false;
+        
+        return true;
+    }
+}

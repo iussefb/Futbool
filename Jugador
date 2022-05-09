@@ -1,0 +1,10 @@
+package Futbool;
+
+
+public class Jugador extends Plantilla{
+    
+    //dorsal, si es titular
+    
+    private int dorsal;
+    private float titular;
+}

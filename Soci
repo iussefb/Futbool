@@ -1,0 +1,237 @@
+
+package Futbool;
+
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Spliterator;
+
+
+
+public class Soci extends Persona{
+    
+    private int num;
+    private int numLocalitat;
+    private int quota;
+
+    Scanner teclat = new Scanner(System.in);
+    
+
+    /*public Soci(int num, int numLocalitat, int quota, DNI Dni, String nom, String cognom, LocalDate naix, String telefon, Email email) {
+        super(Dni, nom, cognom, naix, telefon, email);
+        this.num = num;
+        this.numLocalitat = numLocalitat;
+        this.quota = quota;
+    }*/
+    
+    
+    
+    private void file(){
+    
+    
+    }
+    
+    @Override
+    public void Alta() throws IOException{
+       
+        try {
+            System.out.println("\n  ºº   Donar Alta Soci   ºº  ");
+            
+            super.Alta();
+            
+            System.out.println("Enter el numero numero: ");
+                this.num = teclat.nextInt();
+            System.out.println("Enter el numero de localitat: "); 
+                this.numLocalitat = teclat.nextInt();
+            System.out.println("Enter el quota:  ");  
+                this.quota = teclat.nextInt();
+            File file = new File("C:\\Users\\ADMIN\\Downloads\\ESTUDIAR\\programacion\\club\\Soci.txt"); 
+            FileWriter fw = new FileWriter("C:\\Users\\ADMIN\\Downloads\\ESTUDIAR\\programacion\\club\\Soci.txt",true);
+            PrintWriter pw = new PrintWriter(fw);
+            
+            pw.println();
+            pw.print(super.toString() + ":" + this.num + ":" + this.numLocalitat +":" + this.quota);
+            
+            fw.close();
+            pw.close();
+            
+            System.out.println("\nhas donat alta del soci que te DNI= " + d.getDni() );
+            
+        } catch (IOException ex) {
+            
+        }
+    }
+    
+    public void ModificarSoci() throws FileNotFoundException, IOException{
+        File file = new File("C:\\Users\\ADMIN\\Downloads\\ESTUDIAR\\programacion\\club\\Soci.txt");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        Scanner scan =new Scanner(file);
+        ArrayList <String> linea = new ArrayList<>();
+        
+        Spliterator<String> soci =linea.spliterator();
+        String a = scan.next();
+        String line;
+        System.out.println("Enter el Dni del Soci que vulls cambiar");
+        String start = teclat.next();
+        while((line = br.readLine())!= null){
+            String [] split = line.split(":");
+            if(start.equalsIgnoreCase(split[0])){
+                do{
+                        System.out.println("\n");
+                   System.out.println(" Que Quieres Cambiar?");
+                   System.out.println(" 1-  El Dni ");
+                   System.out.println(" 2-  El nom");
+                   System.out.println(" 3-  El cognom");
+                   System.out.println(" 4-  El data de naixament  ");
+                   System.out.println(" 5-  El movil ");
+                   System.out.println(" 6-  El email");
+                   System.out.println(" 7-  El numero");
+                   System.out.println(" 8-  El localitat");
+                   System.out.println(" 9-  El quota");
+                   System.out.println(" 10- has cambiat");
+                   System.out.println("\t\nTRIA UNA OPCIO:");
+
+                    /*super.Midificar(split[0], split[1],split[2],split[3],split[4],split[5]);
+                    setNum(split[6]);
+                    setNumLocalitat(split[7]);
+                    setQuota(split[8]);*/
+                    Persona p = new Persona();
+                    int opcio;
+                switch(opcio= teclat.nextInt() ){
+
+                    case 1 : 
+                        String dni ;
+                        do{
+                           System.out.println("enter dni");
+                           dni = teclat.next();
+                        }while(!d.ValidarDni(dni));
+                            d.setDni(dni);
+                            setDni(d);
+                        break;
+                    case 2 :
+                        System.out.println("Enter el nom");
+                        String nom = teclat.next();
+                        p.setNom(nom);
+                        break;
+                    case 3 :
+                        System.out.println("Enter el cognom");
+                        String cognom = teclat.next();
+                        p.setCognom(cognom);
+                        break;
+                    case 4 :
+                        System.out.println("Enter el data de naixamet");
+                        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        boolean dataCorrecte;
+                        LocalDate nnaix = null;
+                        do{
+                            
+                           try{
+                                dataCorrecte=true;
+                                System.out.println("Enter el data de naixament(yyyy-MM-dd):");
+                                nnaix = LocalDate.parse(teclat.next(), f);
+                            }catch(Exception e){
+                                dataCorrecte=false;
+                            }
+                        }while(!dataCorrecte);
+                        p.setNaix(nnaix);
+                        break;
+                    case 5 :
+                        System.out.println("Enter el telefon");
+                        String movil ;
+                        do{
+                           System.out.println("Enter el movil:");
+                           movil = teclat.next();
+                        }while(!m.validarMovil(movil));
+                        m.setNumero(movil);
+                        p.setTelefon(m);
+                        break;
+                    case 6:
+                         String email;
+                        do{
+                            System.out.println("Enter el email:");
+                            email = teclat.next();
+                        }while(!e.ValidarEmail(email));
+
+                        e.setEmail(email);
+                        p.setEmail(e);
+                        break; 
+                    case 7:
+                        p.setEmail(e);
+                        break;
+                    
+                    
+                    case 10:
+
+                        sortir=true;
+                        break;
+                    default:
+                        System.out.println("");
+                }
+        
+                }while(!sortir);
+                printModificar();
+                
+            FileWriter fw = new FileWriter("C:\\Users\\ADMIN\\Downloads\\ESTUDIAR\\programacion\\club\\Soci.txt",true);
+            PrintWriter pw = new PrintWriter(fw);
+            
+            pw.println();
+            pw.print(super.toString() + ":" + this.num + ":" + this.numLocalitat +":" + this.quota);
+            
+            fw.close();
+            pw.close();
+                
+            }
+        }
+    }
+
+    public void printModificar(){
+              
+
+        
+    }
+    
+    public void setNum(String num) {
+        
+         num = Integer.toString(this.num );
+    }
+
+    public void setNumLocalitat(String numLocalitat) {
+         numLocalitat = Integer.toString(this.numLocalitat );
+    }
+
+    public void setQuota(String quota) {
+         quota= Integer.toString(this.quota );
+    }
+    
+    
+    
+    public ArrayList <Soci> BaixaSoci(){
+        
+        return null;
+    }
+    
+    public ArrayList <Soci> VisualitzarSociordenatnom(){
+        
+        return null;
+    }
+    
+    public ArrayList <Soci> VisualitzarSociOrdenatLocalitat(){
+        
+        return null;
+    }
+    
+    public ArrayList <Soci> VisualitzarSociOrdenatQuota(){
+        
+        return null;
+    }
+}
